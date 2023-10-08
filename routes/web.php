@@ -14,5 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('layouts.app');
 });
+
+Route::view('/importar', 'Apartados.importar')->name('importar');
+Route::view('/ejemplos', 'Apartados.ejemplos')->name('ejemplos');
