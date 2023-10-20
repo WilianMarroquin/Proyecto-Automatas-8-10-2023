@@ -39,12 +39,14 @@
             <a href="{{route('ejemplos')}}" class="nav-link @yield('ejemplos-active')">Ejemplos</a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link disabled @yield('')">Disabled</a>
+            <a href="{{route('tabla')}}" class="nav-link  @yield('')">Tabla</a>
         </li>
     </ul>
     <button onclick="morra()">prueba</button>
 
 @yield('contenido')
+
+@yield('scripts')
 
 </body>    
 </html>
