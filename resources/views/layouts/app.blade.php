@@ -18,11 +18,11 @@
     @Vite(['resources/sass/app.scss','resources/js/app.js'])
 
     <title>Automatas-@yield('titulo')</title>
-    @yield('head')
+    @stack('head')
 </head>
 <body>
     <!-- Nav tabs -->
-    <ul style="background: gray; color: black" class="nav nav-tabs " id="navId" style="margin-bottom: 30px; padding: 20px">
+    <ul style="background: rgb(70, 220, 0); color: black" class="nav nav-tabs " id="navId" style="margin-bottom: 30px; padding: 20px">
         <li class="nav-item">
             <a href="{{route('importar')}}" class="nav-link @yield('importar-active')">Empezar!</a>
         </li>
@@ -41,12 +41,14 @@
         <li class="nav-item">
             <a href="{{route('tabla')}}" class="nav-link  @yield('')">Tabla</a>
         </li>
+        <li class="nav-item">
+            <a href="{{route('Automata')}}" class="nav-link  @yield('automatas-active')">Automata</a>
+        </li>
     </ul>
-    <button onclick="morra()">prueba</button>
 
 @yield('contenido')
 
-@yield('scripts')
+@stack('scripts')
 
 </body>    
 </html>
