@@ -40,29 +40,38 @@
             text-align: center;
             justify-content: center;
             align-items: center;
+        }
+
+        .border {
             border: 1px solid black;
         }
 
         .tamaño {
-            max-width: 100px;
-            min-width: 100px;
+            max-width: 50px;
+            min-width: 50px;
+        }
+        .cuadroInicial{
+            margin-left: 12px; 
+        }
+        .colorHeadCuadro{
+            background-color: #00e745;
         }
     </style>
 @endpush
 <div style="margin-bottom: 20px">
-  <label for="formFileLg" class="form-label">Archivo de entrada: </label>
-  <input class="form-control form-control-lg" id="file-input" type="file">
+    <label for="formFileLg" class="form-label">Archivo de entrada: </label>
+    <input class="form-control form-control-lg" id="file-input" type="file">
 </div>
 
 <textarea style="display: none" name="valores" id="valores" cols="30" rows="10"></textarea>
 
-<div style="width:50%; " class=" text-center">
+<div style="width:90%; margin:auto; margin-top: 40px; "class=" text-center">
     <div id="simbolos" class="row">
-        <div class="col" style="margin-left: 10px; max-width:90px"></div>
+        {{-- <div class="col" style="margin-left: 10px; max-width:52px"></div> --}}
     </div>
     <div class="" style="display: flex">
         {{-- Los estados --}}
-        <div class="col" id="estados" style="min-width: 88px">
+        <div class="col" id="estados" style="min-width: 50px">
         </div>
         {{-- las transiciones --}}
         <div class="container text-center">
@@ -80,7 +89,7 @@
                 return;
             }
             var lector = new FileReader();
-            lector.onload = function (e) {
+            lector.onload = function(e) {
                 var contenido = e.target.result;
                 mostrarContenido(contenido);
             };
@@ -97,7 +106,7 @@
             var transicionCalculada = CalcularTranscicion(transiciones);
             hacerTabla(simbolos, transicionCalculada, estados);
             document.getElementById('valores').innerHTML = contenido;
-            darvalor(); 
+            darvalor();
         }
 
         document.getElementById('file-input')
@@ -162,10 +171,22 @@
         }
 
         function hacerTabla(simbolos, transicionCalculada, estados) {
+
+            var div = document.createElement('div');
+            div.classList.add('col');
+            div.classList.add('border');
+            div.classList.add('tamaño');
+            div.classList.add('cuadroInicial');
+            div.classList.add('colorHeadCuadro');
+            document.getElementById('simbolos').appendChild(div);
+
+            
+
             for (var i = 0; i < simbolos.length; i++) {
                 crearElementoHtml(simbolos[i]);
                 console.log(simbolos[1]);
             }
+
             //se crea los estados de la tabla
             for (i = 0; i < estados.length; i++) {
                 crearElementoEstados(estados[i]);
@@ -186,7 +207,9 @@
         function crearElementoHtml(Dato) {
             var div = document.createElement('div');
             div.classList.add('col');
+            div.classList.add('border');
             div.classList.add('tamaño');
+            div.classList.add('colorHeadCuadro');
             div.innerHTML = Dato;
             document.getElementById('simbolos').appendChild(div);
         }
@@ -198,6 +221,7 @@
             div.classList.add('col-sm-4');
             div.classList.add('col')
             div.classList.add('tamaño');
+            div.classList.add('border');
             div.setAttribute('id', 'transicion: ' + j + " linea: " + i); // Add an id to the div
             document.getElementById('transiciones').appendChild(div);
         }
@@ -205,6 +229,8 @@
         function crearElementoEstados(Dato) {
             var div = document.createElement('div');
             div.classList.add('col');
+            // div.classList.add('tamaño');
+            div.classList.add('border');
             div.style.max_width = '100px';
             div.innerHTML = Dato;
             document.getElementById('estados').appendChild(div);
