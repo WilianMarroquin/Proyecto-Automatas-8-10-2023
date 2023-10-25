@@ -54,7 +54,7 @@
   <input class="form-control form-control-lg" id="file-input" type="file">
 </div>
 
-<textarea name="valores" id="valores" cols="30" rows="10"></textarea>
+<textarea style="display: none" name="valores" id="valores" cols="30" rows="10"></textarea>
 
 <div style="width:50%; " class=" text-center">
     <div id="simbolos" class="row">
@@ -97,6 +97,7 @@
             var transicionCalculada = CalcularTranscicion(transiciones);
             hacerTabla(simbolos, transicionCalculada, estados);
             document.getElementById('valores').innerHTML = contenido;
+            darvalor(); 
         }
 
         document.getElementById('file-input')
@@ -170,7 +171,7 @@
                 crearElementoEstados(estados[i]);
             }
             //se crea los simbolos de la tabla
-            for (i = 1; i < transicionCalculada.length - 1; i++) {
+            for (i = 1; i < transicionCalculada.length; i++) {
                 for (var j = 0; j < transicionCalculada[i].length; j++) {
                     crearElementoHtmlTransiciones("Q" + transicionCalculada[i][j], i, j);
                 }
