@@ -47,8 +47,8 @@
         }
 
         .tamaño {
-            max-width: 50px;
-            min-width: 50px;
+            max-width: 70px;
+            min-width: 70px;
         }
         .cuadroInicial{
             margin-left: 12px; 
@@ -71,7 +71,7 @@
     </div>
     <div class="" style="display: flex">
         {{-- Los estados --}}
-        <div class="col" id="estados" style="min-width: 50px">
+        <div class="col" id="estados" style="min-width: 70 px">
         </div>
         {{-- las transiciones --}}
         <div class="container text-center">
@@ -163,8 +163,8 @@
         function CalcularTranscicion(transciciones) {
             var array = [];
             for (var i = 0; i < transciciones.length; i++) {
-                var o = transciciones[i].replace(/Q/g, '');
-                o = o.split(',');
+                var o = transciciones[i].replace(/,/g, '?');
+                o = o.split('?');
                 array.push(o);
             }
             return array;
@@ -194,7 +194,7 @@
             //se crea los simbolos de la tabla
             for (i = 1; i < transicionCalculada.length; i++) {
                 for (var j = 0; j < transicionCalculada[i].length; j++) {
-                    crearElementoHtmlTransiciones("Q" + transicionCalculada[i][j], i, j);
+                    crearElementoHtmlTransiciones(transicionCalculada[i][j], i, j);
                 }
                 var div = document.createElement('div');
                 div.classList.add('w-100');
@@ -231,7 +231,8 @@
             div.classList.add('col');
             // div.classList.add('tamaño');
             div.classList.add('border');
-            div.style.max_width = '100px';
+            div.classList.add('tamaño');
+            // div.style.max_width = '70px';
             div.innerHTML = Dato;
             document.getElementById('estados').appendChild(div);
         }

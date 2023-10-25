@@ -91,7 +91,7 @@
         
         </div>
         <div >
-            <div  id="mynetwork"></div>
+            <div style="width: 400px; heigth:400px; margin: auto" id="mynetwork"></div>
         </div>
     </div>
 </div>
@@ -286,8 +286,8 @@
         function CalcularTranscicion(transciciones) {
             var array = [];
             for (var i = 0; i < transciciones.length; i++) {
-                var o = transciciones[i].replace(/Q/g, '');
-                o = o.split(',');
+                var o = transciciones[i].replace(/,/g, '?');
+                o = o.split('?');
                 array.push(o);
             }
             return array;
@@ -311,7 +311,7 @@
             for (var a = 0; a < transicionCalculada.length; a++) {
                 for (var b = 0; b < simbolos.length; b++) {
                         console.log('El valor de A: '+a+"El valor de B: "+b); 
-                    var dato = dato + estados[a] + " -- " + "Q" + transicionCalculada[a][b] + "[label=" + '"' + simbolos[
+                    var dato = dato + estados[a] + " -- " + transicionCalculada[a][b] + "[label=" + '"' + simbolos[
                         b] + '"' + ", color=blue];\n";
                 }
             }
@@ -322,7 +322,7 @@
         function diseñarAutomatafuncion(simbolos, estados, transicionCalculada){
             for (var a = 0; a < transicionCalculada.length; a++) {
                 for (var b = 0; b < simbolos.length; b++) {
-                    var dato = dato + estados[a] + "->" + "Q" + transicionCalculada[a][b] + "[label=" + '"' + simbolos[
+                    var dato = dato + estados[a] + "->" + transicionCalculada[a][b] + "[label=" + '"' + simbolos[
                         b] + '"]' + "\n";
                 }
             }

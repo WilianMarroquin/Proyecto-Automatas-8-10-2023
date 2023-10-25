@@ -25,11 +25,11 @@
         <div class="card-header bg-success opacity-10">
                 Automatas:
             </div>
-        <div class="row align-items-start">
-            <div class="col">
+        <div class="row align-items-start" >
+            <div class="col" style="width: 70%">
                 @include('Apartados.Tabla')
             </div>
-            <div class="col">
+            <div class="col" style="width: 20%">
                 @include('Apartados.Automata')
             </div>
         </div>
