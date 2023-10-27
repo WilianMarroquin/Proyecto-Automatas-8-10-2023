@@ -2,6 +2,14 @@
 @section('titulo', 'Automata')
 @section('automatas-active', 'active')
 
+@push('head')
+<style>
+    .boton_verificar{
+        display: none; 
+    }
+</style>
+@endpush
+
 @section('contenido')
 
 {{-- 
@@ -25,13 +33,16 @@
         <div class="card-header bg-success opacity-10">
                 Automatas:
             </div>
-        <div class="row align-items-start" >
+            <button id="boton_pasos" class="btn btn-success boton_verificar">Pasos Espesificados</button>
+
+            <div class="row align-items-start" >
             <div class="col" style="width: 70%">
                 @include('Apartados.Tabla')
             </div>
             <div class="col" style="width: 20%">
                 @include('Apartados.Automata')
             </div>
+
         </div>
     </div>
 

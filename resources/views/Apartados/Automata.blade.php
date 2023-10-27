@@ -1,99 +1,24 @@
 @push('head')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="../../../../standalone/umd/vis-network.min.js"></script>
-    {{-- <style type="text/css">
-  body,
-  html {
-    font: 10pt sans;
-    line-height: 1.5em;
-    width: 100%;
-    height: 100%;
-    padding: 0;
-    margin: 0;
-    color: #4d4d4d;
-    box-sizing: border-box;
-    overflow: hidden;
-  }
-
-  #header {
-    margin: 0;
-    padding: 10px;
-    box-sizing: border-box;
-  }
-
-  #contents {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    position: relative;
-  }
-
-  #left,
-  #right {
-    position: absolute;
-    width: 50%;
-    height: 100%;
-    margin: 0;
-    padding: 10px;
-    box-sizing: border-box;
-    display: inline-block;
-  }
-
-  #left {
-    top: 0;
-    left: 0;
-  }
-
-  #right {
-    top: 0;
-    right: 0;
-  }
-
-  #error {
-    color: red;
-  }
-
-  #data {
-    width: 100%;
-    height: 100%;
-    border: 1px solid #d3d3d3;
-    box-sizing: border-box;
-    resize: none;
-  }
-
-  #draw {
-    padding: 5px 15px;
-  }
-
-  #mynetwork {
-    width: 100%;
-    height: 100%;
-    border: 1px solid #d3d3d3;
-    box-sizing: border-box;
-  }
-
-  a:hover {
-    color: red;
-  }
-</style> --}}
 @endpush
 <div>
     <div id="header">
         <div>
-            <button class="btn btn-info" id="draw" title="Draw the DOT graph (Ctrl+Enter)">Draw</button>
+            <button class="btn btn-info" id="draw" title="La vaca lola tiene cabeza y no tiene cola">Draw</button>
+            <div>
+                <textarea id="data" cols="30" rows="10"></textarea>
+            </div>
         </div>
     </div>
-    
+    <h1 id="pruebas"></h1>
+
     <div id="contents">
-        <div id="left">
-            <textarea style="display: none" id="data" cols="30" rows="10"></textarea>
-        
-        </div>
-        <div >
-            <div style="width: 400px; heigth:400px; margin: auto" id="mynetwork"></div>
+        <div>
+            <div class="mydiv" style="width: 400px; heigth:400px; margin: auto" id="mynetwork"></div>
         </div>
     </div>
+
 </div>
 
 @push('scripts')
@@ -148,6 +73,10 @@
                 data = vis.parseDOTNetwork($("#data").val());
 
                 network.setData(data);
+
+                var button = document.getElementById("boton_verificar");
+                button.style.display = "block";
+
             } catch (err) {
                 // set the cursor at the position where the error occurred
                 var match = /\(char (.*)\)/.exec(err);
@@ -170,31 +99,33 @@
             var simbolos = Obtenersimbolos(contenido);
             var estados = ObtenerEstados(contenido);
             var estadoInicial = ObtenerEstadoInicial(contenido);
+
             var estadoAceptacion = ObtenerEstadosAceptacion(contenido);
+            
             var transiciones = ObtenerTransiciones(contenido);
             var cadenasAnalizar = ObtenerCadenas(contenido);
             var transicionCalculada = CalcularTranscicion(transiciones);
             var dato = "";
             var transicionesModificadas = modificarTransiciones(transiciones);
 
-            console.log("el valor de simbolos: ");
-            console.log(simbolos);
-            console.log("el valor de esatdos: ");
-            //   console.log(estados);
-            //   console.log("el valor de estado inicial: ");
-            console.log(estadoInicial);
-            console.log("el valor de estado aceptacion: ");
-            console.log(estadoAceptacion);
-            console.log("el valor de transiciones: ");
-            console.log(transiciones);
-            console.log("el valor de cadenas a analizar: ");
-            console.log(cadenasAnalizar);
-            console.log("el valor de transiciones calculadas: ");
-            console.log(transicionCalculada);
-            console.log("el valor de transiciones modificadas");
-            console.log(transicionesModificadas);
+            // console.log("el valor de simbolos: ");
+            // console.log(simbolos);
+            // console.log("el valor de esatdos: ");
+            // //   console.log(estados);
+            // //   console.log("el valor de estado inicial: ");
+            // console.log(estadoInicial);
+            // console.log("el valor de estado aceptacion: ");
+            // console.log(estadoAceptacion);
+            // console.log("el valor de transiciones: ");
+            // console.log(transiciones);
+            // console.log("el valor de cadenas a analizar: ");
+            // console.log(cadenasAnalizar);
+            // console.log("el valor de transiciones calculadas: ");
+            // console.log(transicionCalculada);
+            // console.log("el valor de transiciones modificadas");
+            // console.log(transicionesModificadas);
 
-            var diseñarAutomata = diseñarAutomatafuncion(simbolos, estados, transicionCalculada); 
+            var diseñarAutomata = diseñarAutomatafuncion(simbolos, estados, transicionCalculada);
 
             // Esta funcion esta terminada solo buscare otra posible forma para hacerlo
             // var lineas = agregarLineas(simbolos, estados, transicionCalculada);
@@ -203,18 +134,23 @@
             //      dato = dato + estados[a] + "->" + transicionesModificadas[a] + ";\n";
             //  }
             document.getElementById("data").value = "digraph G {\n" +
-                // lineas +
                 "node [shape=circle fontsize=16]\n" +
                 "edge [length=100, color=gray, fontcolor=black]\n" +
-                //  dato +
-                
-                diseñarAutomata + "\n"+
-                //  "A [\n" +
-                //  "fontcolor=white,\n" +
-                //  "color=yellow,\n" +
-                //  "label=filled,\n" +
-                //  "]\n" +
+                diseñarAutomata +
                 "}";
+
+
+            document.getElementById("EstadoActual").innerHTML = estadoInicial;
+            document.getElementById("cadenasUsar").innerHTML = cadenasAnalizar;
+            document.getElementById("NumeroCaracter").innerHTML = 0;
+            document.getElementById("EstadoAceptacion").innerHTML = estadoAceptacion;
+
+            var ArrayCadenas = ObtenerValorCadenas(document.getElementById("cadenasUsar").textContent);
+            // ArrayCadenas[0] = ArrayCadenas[0] + "," + " ";
+            // var cadenaActual = ArrayCadenas[0].split(',');
+            // document.getElementById("CaracterActual").innerHTML = cadenaActual[0][0]; 
+            // console.log(cadenaActual); 
+
         };
         //Funcion para obtener los simbolos del archivo//
         function Obtenersimbolos(contenido) {
@@ -275,12 +211,8 @@
         //Funcion para obtener las cadenas a analizar del archivo//
         function ObtenerCadenas(contenido) {
             var footer = contenido.split('Cadenas a analizar:');
-            var array = footer[1].split('\n');
-            array = array.filter(function(el) {
-                return el != "";
-            });
+            var array = footer[1].replace(/\n/g, '$');
             return array;
-
         }
         //Funcion para calcular las transiciones//
         function CalcularTranscicion(transciciones) {
@@ -310,7 +242,7 @@
             var iteraciones = estados.length;
             for (var a = 0; a < transicionCalculada.length; a++) {
                 for (var b = 0; b < simbolos.length; b++) {
-                        console.log('El valor de A: '+a+"El valor de B: "+b); 
+                    console.log('El valor de A: ' + a + "El valor de B: " + b);
                     var dato = dato + estados[a] + " -- " + transicionCalculada[a][b] + "[label=" + '"' + simbolos[
                         b] + '"' + ", color=blue];\n";
                 }
@@ -319,7 +251,7 @@
             return dato;
         }
 
-        function diseñarAutomatafuncion(simbolos, estados, transicionCalculada){
+        function diseñarAutomatafuncion(simbolos, estados, transicionCalculada) {
             for (var a = 0; a < transicionCalculada.length; a++) {
                 for (var b = 0; b < simbolos.length; b++) {
                     var dato = dato + estados[a] + "->" + transicionCalculada[a][b] + "[label=" + '"' + simbolos[
@@ -330,10 +262,113 @@
             return dato;
         }
 
+        function datoRenderAutomata() {
+            var estadoActual = document.getElementById("EstadoActual").textContent;
+            var dato = document.getElementById("data").value;
+            var cadenas = ObtenerValorCadenas(document.getElementById("cadenasUsar").textContent);
+
+            var CaracterActual = document.getElementById("CaracterActual").textContent;
+
+            var estadoAceptacion = document.getElementById("EstadoAceptacion").textContent;
+
+            var NumeroCaracter = document.getElementById("NumeroCaracter").textContent;
+
+            dato = dato.split('black]');
+            dato[1] = dato[1].replace(/}/g, '');
+            datosSinCalcular = dato[1].split('\n');
+            var datosCalculados = datosSinCalcular.map(function(elemento) {
+                return elemento.replace(/\t/g, "");
+            });
+            datosCalculados = datosCalculados.filter(function(el) {
+                return el != "";
+            });
+
+            cadenas[0] = cadenas[0] + "," + " ";
+            cadenaActual = cadenas[0].split(',');
+            console.log(cadenaActual);
+            var a = 0;
+            var colorEstado = "";
+            var EstadoSiguiente = " "
+            var simboloComparado = " "; 
+            datosCalculados.forEach(element => {
+                var EstadoComparar = element.split('->');
+                if (estadoActual == EstadoComparar[0]) {
+                    var simboloComparar = element.split('"');
+                     simboloComparado = simboloComparar[1].split('"');
+                    if (simboloComparado[0] == cadenaActual[NumeroCaracter]) {
+                        var ProximoEstado = EstadoComparar[1].split('[');
+                        EstadoSiguiente = ProximoEstado;  
+                        datosCalculados[a] = estadoActual + "->" + ProximoEstado[0] + "[label=" + '"' +
+                            simboloComparado[0] + '", color = aqua]' + estadoActual + "[color=aqua]" + "\n";
+
+                        if (document.getElementById('EstadoAnterior').textContent != "") {
+                            var Numero = document.getElementById('NumeroEstadoAnterior').textContent;
+                            var estadoAnterior = document.getElementById('EstadoAnterior').textContent;
+                            var ProximoEstadoAnterior = document.getElementById('ProximoEstadoAnterior')
+                                .textContent;
+
+                            var simboloComparadoAnterior = document.getElementById('ProximoSimboloAnterior')
+                                .textContent;
+
+                            datosCalculados[Numero] = estadoAnterior + "->" + ProximoEstadoAnterior +
+                                "[label=" +
+                                '"' +
+                                simboloComparadoAnterior + '"]' + "\n";
+                        }
+
+                        document.getElementById('ProximoEstadoAnterior').innerHTML = ProximoEstado[0];
+                        document.getElementById('EstadoAnterior').innerHTML = estadoActual;
+                        document.getElementById("NumeroEstadoAnterior").innerHTML = a;
+                        document.getElementById("ProximoSimboloAnterior").innerHTML = simboloComparado[0];
 
 
-        // "F -> F[label=valor];\n" +
+
+                        document.getElementById("EstadoActual").innerHTML = ProximoEstado[0];
+                        NumeroCaracter = parseInt(NumeroCaracter);
+                        var numeroTemporal = NumeroCaracter + 1;
+                        document.getElementById("NumeroCaracter").innerHTML = numeroTemporal;
+                        var siguienteCaracter = cadenaActual[numeroTemporal]
+                        document.getElementById('CaracterActual').innerHTML = siguienteCaracter;
+                    }
+                }
+                a = a + 1;
+            });
+
+            if (cadenaActual[NumeroCaracter] == " ") {
+                datosCalculados[a] = estadoActual + "[color=red]" + "\n";
+                estadoAceptacion = estadoAceptacion.split(' ').join(''); 
+                if (estadoActual == estadoAceptacion) {
+                    console.log(estadoActual + " "+ estadoAceptacion); 
+                    document.getElementById("EsValida").innerHTML = 'La cadena es valida';
+                } else {
+                    console.log("El estado actual:"+estadoActual + "El estado de aceptacion:"+ estadoAceptacion); 
+                    document.getElementById("EsValida").innerHTML = 'La No es Valida';
+                }
+            }
+            for (var i = 0; i < datosCalculados.length; i++) {
+                var Dato = Dato + datosCalculados[i] + "\n";
+                console.log(datosCalculados[i]);
+            }
+            Dato = Dato.replace(/undefined/g, '');
+
+            var data = document.getElementById("data");
+            data.value = "";
+            data.value = "digraph G {\n" +
+                "node [shape=circle fontsize=16]\n" +
+                "edge [length=100, color=gray, fontcolor=black]\n" +
+                Dato +
+                "}";
+
+                draw(); 
+        }
 
 
+        function ObtenerValorCadenas(cadenas) {
+            var array = cadenas.split('$');
+            array = array.filter(function(el) {
+                return el != "";
+            });
+            return array;
+        }
     </script>
 @endpush
