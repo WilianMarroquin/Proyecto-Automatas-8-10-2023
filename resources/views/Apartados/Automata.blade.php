@@ -7,7 +7,7 @@
         <div>
             <button class="btn btn-info" id="draw" title="La vaca lola tiene cabeza y no tiene cola">Draw</button>
             <div>
-                <textarea id="data" cols="30" rows="10"></textarea>
+                <textarea style="display: none" id="data" cols="30" rows="10"></textarea>
             </div>
         </div>
     </div>
@@ -101,29 +101,29 @@
             var estadoInicial = ObtenerEstadoInicial(contenido);
 
             var estadoAceptacion = ObtenerEstadosAceptacion(contenido);
-            
+
             var transiciones = ObtenerTransiciones(contenido);
             var cadenasAnalizar = ObtenerCadenas(contenido);
             var transicionCalculada = CalcularTranscicion(transiciones);
             var dato = "";
             var transicionesModificadas = modificarTransiciones(transiciones);
 
-            // console.log("el valor de simbolos: ");
-            // console.log(simbolos);
-            // console.log("el valor de esatdos: ");
-            // //   console.log(estados);
-            // //   console.log("el valor de estado inicial: ");
-            // console.log(estadoInicial);
-            // console.log("el valor de estado aceptacion: ");
-            // console.log(estadoAceptacion);
-            // console.log("el valor de transiciones: ");
-            // console.log(transiciones);
-            // console.log("el valor de cadenas a analizar: ");
-            // console.log(cadenasAnalizar);
-            // console.log("el valor de transiciones calculadas: ");
-            // console.log(transicionCalculada);
-            // console.log("el valor de transiciones modificadas");
-            // console.log(transicionesModificadas);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             var diseñarAutomata = diseñarAutomatafuncion(simbolos, estados, transicionCalculada);
 
@@ -139,9 +139,11 @@
                 diseñarAutomata +
                 "}";
 
+                cadenasAnalizar = cadenasAnalizar.split('$');
+
 
             document.getElementById("EstadoActual").innerHTML = estadoInicial;
-            document.getElementById("cadenasUsar").innerHTML = cadenasAnalizar;
+            document.getElementById("cadenasUsar").innerHTML = cadenasAnalizar[1];
             document.getElementById("NumeroCaracter").innerHTML = 0;
             document.getElementById("EstadoAceptacion").innerHTML = estadoAceptacion;
 
@@ -149,7 +151,7 @@
             // ArrayCadenas[0] = ArrayCadenas[0] + "," + " ";
             // var cadenaActual = ArrayCadenas[0].split(',');
             // document.getElementById("CaracterActual").innerHTML = cadenaActual[0][0]; 
-            // console.log(cadenaActual); 
+
 
         };
         //Funcion para obtener los simbolos del archivo//
@@ -242,7 +244,7 @@
             var iteraciones = estados.length;
             for (var a = 0; a < transicionCalculada.length; a++) {
                 for (var b = 0; b < simbolos.length; b++) {
-                    console.log('El valor de A: ' + a + "El valor de B: " + b);
+
                     var dato = dato + estados[a] + " -- " + transicionCalculada[a][b] + "[label=" + '"' + simbolos[
                         b] + '"' + ", color=blue];\n";
                 }
@@ -285,19 +287,25 @@
 
             cadenas[0] = cadenas[0] + "," + " ";
             cadenaActual = cadenas[0].split(',');
-            console.log(cadenaActual);
+
             var a = 0;
             var colorEstado = "";
             var EstadoSiguiente = " "
-            var simboloComparado = " "; 
+            var simboloComparado = " ";
             datosCalculados.forEach(element => {
                 var EstadoComparar = element.split('->');
+                console.log(a); 
                 if (estadoActual == EstadoComparar[0]) {
+
                     var simboloComparar = element.split('"');
-                     simboloComparado = simboloComparar[1].split('"');
+                    simboloComparado = simboloComparar[1].split('"');
+                    console.log('el simbolo que se compara es: ' + simboloComparado[0] +
+                        ' y el caracter actual es: ' + cadenaActual[NumeroCaracter]);
                     if (simboloComparado[0] == cadenaActual[NumeroCaracter]) {
+                        console.log(simboloComparado[0] + ' = ' + cadenaActual[NumeroCaracter]);
+
                         var ProximoEstado = EstadoComparar[1].split('[');
-                        EstadoSiguiente = ProximoEstado;  
+                        EstadoSiguiente = ProximoEstado;
                         datosCalculados[a] = estadoActual + "->" + ProximoEstado[0] + "[label=" + '"' +
                             simboloComparado[0] + '", color = aqua]' + estadoActual + "[color=aqua]" + "\n";
 
@@ -334,20 +342,25 @@
                 a = a + 1;
             });
 
+
+
+
+
+
             if (cadenaActual[NumeroCaracter] == " ") {
                 datosCalculados[a] = estadoActual + "[color=red]" + "\n";
-                estadoAceptacion = estadoAceptacion.split(' ').join(''); 
+                estadoAceptacion = estadoAceptacion.split(' ').join('');
                 if (estadoActual == estadoAceptacion) {
-                    console.log(estadoActual + " "+ estadoAceptacion); 
+
                     document.getElementById("EsValida").innerHTML = 'La cadena es valida';
                 } else {
-                    console.log("El estado actual:"+estadoActual + "El estado de aceptacion:"+ estadoAceptacion); 
-                    document.getElementById("EsValida").innerHTML = 'La No es Valida';
+
+                    document.getElementById("EsValida").innerHTML = 'La cadena no es Valida';
                 }
             }
             for (var i = 0; i < datosCalculados.length; i++) {
                 var Dato = Dato + datosCalculados[i] + "\n";
-                console.log(datosCalculados[i]);
+
             }
             Dato = Dato.replace(/undefined/g, '');
 
@@ -359,7 +372,7 @@
                 Dato +
                 "}";
 
-                draw(); 
+            draw();
         }
 
 
