@@ -37,10 +37,11 @@
         <img src="imagenes/logoUniversidad.jpg" alt="Tu Logo" class="logo">
         <h1>Proyecto Automatas Y lenguajes Formales</h1>
         <p>Grupo:</p>
-        <p>Wilian Alberto Marroquin Morales </p>
-        <p>Domingo De Jesus Sente Sun</p>
-        <p>Jerson Alberto Donis Marroquin </p>
-        <p>Huver Donis Cordova</p>
-        <p>Emerson</p>
+        <p>Wilian Alberto Marroquin Morales 1890-21-15037</p>
+        <p>Domingo De Jesus Sente Sun 1890-21-12455</p>
+        <p>Jerson Alberto Donis Marroquin 1890-21-20238</p>
+        <p>Huver Roberto Donis Cordova 1890-21-15309</p>
+        <p>Emerson Alexsander Garcia Piedrasanta 1890-21-342</p>
+        <p>Fernando Alejandro Sanchez Carias 1890-21-1069</p>
     </div>
 @endsection
