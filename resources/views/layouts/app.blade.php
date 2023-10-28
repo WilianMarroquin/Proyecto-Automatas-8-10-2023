@@ -16,6 +16,13 @@
           }
         </style>
     @Vite(['resources/sass/app.scss','resources/js/app.js'])
+<script src="sweetalert2.all.min.js"></script>
+<link rel="stylesheet" href="sweetalert2.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
 
     <title>Automatas-@yield('titulo')</title>
     @stack('head')

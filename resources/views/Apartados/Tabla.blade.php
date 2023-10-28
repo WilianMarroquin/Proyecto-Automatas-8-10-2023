@@ -50,10 +50,12 @@
             max-width: 70px;
             min-width: 70px;
         }
-        .cuadroInicial{
-            margin-left: 12px; 
+
+        .cuadroInicial {
+            margin-left: 12px;
         }
-        .colorHeadCuadro{
+
+        .colorHeadCuadro {
             background-color: #00e745;
         }
     </style>
@@ -79,20 +81,23 @@
             </div>
         </div>
     </div>
+    
 </div>
 
- <button onclick="datoRenderAutomata()">hola</button>
-            <span>El estado Actual es:  <h4 id="EstadoActual"></h4></span>
-            <span>El numero de caracter es:  <h4 id="NumeroCaracter"></h4></span>
-            <span>Las cadenas a usar son:  <h4 id="cadenasUsar"></h4></span>
-            <span>El caracter actual es:  <h4 id="CaracterActual"></h4></span>
-            <span>El estado de aceptacion es :  <h4 id="EstadoAceptacion"></h4></span>
-            <span>Estado anteerior (Para el color) :  <h4 id="EstadoAnterior"></h4></span>
-            <span>Estado Anterior de transiciones:  <h4 id="NumeroEstadoAnterior"></h4></span>
-            <span>Proximo  estado al que pasa (Anterior):  <h4 id="ProximoEstadoAnterior"></h4></span>
-            <span>Proximo  simbolos al que pasa (Anterior):  <h4 id="ProximoSimboloAnterior"></h4></span>
-            <span>El color del estado (Anterior):  <h4 id="colorEstadoAnterior"></h4></span>
-            <span>¿La cadena es valida?  <h4 id="EsValida"></h4></span>
+
+
+
+<span style="display: none">El estado Actual es: <h4 id="EstadoActual"></h4></span>
+<span style="display: none">El numero de caracter es: <h4 id="NumeroCaracter"></h4></span>
+<span style="display: none">Las cadenas a usar son: <h4 id="cadenasUsar"></h4></span>
+<span style="display: none">El caracter actual es: <h4 id="CaracterActual"></h4></span>
+<span style="display: none">El estado de aceptacion es : <h4 id="EstadoAceptacion"></h4></span>
+<span style="display: none">Estado anteerior (Para el color) : <h4 id="EstadoAnterior"></h4></span>
+<span style="display: none">Estado Anterior de transiciones: <h4 id="NumeroEstadoAnterior"></h4></span>
+<span style="display: none">Proximo estado al que pasa (Anterior): <h4 id="ProximoEstadoAnterior"></h4></span>
+<span style="display: none">Proximo simbolos al que pasa (Anterior): <h4 id="ProximoSimboloAnterior"></h4></span>
+<span style="display: none">El color del estado (Anterior): <h4 id="colorEstadoAnterior"></h4></span>
+<span style="display: none">¿La cadena es valida? <h4 id="EsValida"></h4></span>
 
 
 @push('scripts')
@@ -194,7 +199,7 @@
             div.classList.add('colorHeadCuadro');
             document.getElementById('simbolos').appendChild(div);
 
-            
+
 
             for (var i = 0; i < simbolos.length; i++) {
                 crearElementoHtml(simbolos[i]);

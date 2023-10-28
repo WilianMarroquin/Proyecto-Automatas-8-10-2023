@@ -1,11 +1,20 @@
 @push('head')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="../../../../standalone/umd/vis-network.min.js"></script>
+    <style>
+        .botonSiguienteCadena{
+            display: none;
+        }
+        .siguienteEstado{
+            display: flex;
+        }
+    </style>
 @endpush
 <div>
     <div id="header">
         <div>
-            <button class="btn btn-info" id="draw" title="La vaca lola tiene cabeza y no tiene cola">Draw</button>
+            <button style="display: none" class="btn btn-info" id="draw"
+                title="La vaca lola tiene cabeza y no tiene cola">Draw</button>
             <div>
                 <textarea style="display: none" id="data" cols="30" rows="10"></textarea>
             </div>
@@ -13,9 +22,30 @@
     </div>
     <h1 id="pruebas"></h1>
 
+
     <div id="contents">
         <div>
             <div class="mydiv" style="width: 400px; heigth:400px; margin: auto" id="mynetwork"></div>
+            
+            <button id="siguienteEstado" style="margin-top: 10px" onclick="datoRenderAutomata()" type="button" class="btn btn-success siguienteEstado">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                    <path
+                        d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z">
+                    </path>
+                </svg>
+                Siguiente Estado
+            </button>
+            
+            <button id="botonSiguienteCadena" type="button" class="btn btn-success botonSiguienteCadena">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-arrow-return-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z">
+                    </path>
+                </svg>
+                Siguiente Cadena
+            </button>
         </div>
     </div>
 
@@ -139,7 +169,7 @@
                 diseñarAutomata +
                 "}";
 
-                cadenasAnalizar = cadenasAnalizar.split('$');
+            cadenasAnalizar = cadenasAnalizar.split('$');
 
 
             document.getElementById("EstadoActual").innerHTML = estadoInicial;
@@ -294,7 +324,7 @@
             var simboloComparado = " ";
             datosCalculados.forEach(element => {
                 var EstadoComparar = element.split('->');
-                console.log(a); 
+                console.log(a);
                 if (estadoActual == EstadoComparar[0]) {
 
                     var simboloComparar = element.split('"');
@@ -342,20 +372,33 @@
                 a = a + 1;
             });
 
-
-
-
-
-
             if (cadenaActual[NumeroCaracter] == " ") {
                 datosCalculados[a] = estadoActual + "[color=red]" + "\n";
                 estadoAceptacion = estadoAceptacion.split(' ').join('');
                 if (estadoActual == estadoAceptacion) {
-
-                    document.getElementById("EsValida").innerHTML = 'La cadena es valida';
+                    document.getElementById("siguienteEstado").style.display = "none";
+                    Swal.fire({
+                        title: 'La cadena es aceptada!',
+                        width: 600,
+                        padding: '3em',
+                        color: '#716add',
+                        background: '#fff url(/images/trees.png)',
+                        backdrop: `
+                        rgba(0,0,123,0.4)
+                        url("/images/nyan-cat.gif")
+                        left top
+                        no-repeat `
+                    })
+                    document.getElementById("botonSiguienteCadena").style.display = "block";
                 } else {
-
-                    document.getElementById("EsValida").innerHTML = 'La cadena no es Valida';
+                    document.getElementById("siguienteEstado").style.display = "none";
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'La cadena no es valida!',
+                        footer: '<a href="">Why do I have this issue?</a>'
+                    })
+                    document.getElementById("botonSiguienteCadena").style.display = "block";
                 }
             }
             for (var i = 0; i < datosCalculados.length; i++) {
