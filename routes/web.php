@@ -19,6 +19,8 @@ Route::get('/', function () {
 
 Route::view('/importar', 'Apartados.importar')->name('importar');
 Route::view('/ejemplos', 'Apartados.ejemplos')->name('ejemplos');
+Route::view('/caratula', 'Apartados.caratula')->name('caratula');
+Route::view('/documentacion', 'Apartados.documentacion')->name('documentacion');
 
 Route::view('/tabla', 'Apartados.Tabla')->name('tabla');
 

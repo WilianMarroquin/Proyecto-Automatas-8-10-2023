@@ -2,11 +2,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="../../../../standalone/umd/vis-network.min.js"></script>
     <style>
-        .botonSiguienteCadena{
+        .botonSiguienteCadena {
             display: none;
+            margin-left: 60px;
         }
-        .siguienteEstado{
+
+        .siguienteEstado {
             display: flex;
+            margin-left: 220px;
         }
     </style>
 @endpush
@@ -26,8 +29,9 @@
     <div id="contents">
         <div>
             <div class="mydiv" style="width: 400px; heigth:400px; margin: auto" id="mynetwork"></div>
-            
-            <button id="siguienteEstado" style="margin-top: 10px" onclick="datoRenderAutomata()" type="button" class="btn btn-success siguienteEstado">
+
+            <button id="siguienteEstado" style="margin-top: 10px" onclick="datoRenderAutomata()" type="button"
+                class="btn btn-primary siguienteEstado">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
                     <path
@@ -36,8 +40,9 @@
                 </svg>
                 Siguiente Estado
             </button>
-            
-            <button id="botonSiguienteCadena" type="button" class="btn btn-success botonSiguienteCadena">
+
+            <button id="botonSiguienteCadena" type="button" onclick="DarValorCadenaSiguiente()"
+                class="btn btn-success  botonSiguienteCadena">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-arrow-return-right" viewBox="0 0 16 16">
                     <path fill-rule="evenodd"
@@ -138,23 +143,6 @@
             var dato = "";
             var transicionesModificadas = modificarTransiciones(transiciones);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             var diseñarAutomata = diseñarAutomatafuncion(simbolos, estados, transicionCalculada);
 
             // Esta funcion esta terminada solo buscare otra posible forma para hacerlo
@@ -169,11 +157,14 @@
                 diseñarAutomata +
                 "}";
 
-            cadenasAnalizar = cadenasAnalizar.split('$');
+            document.getElementById("numeroCadenaUso").innerHTML = 0;
+            document.getElementById("todasLasCadenas").innerHTML = cadenasAnalizar;
+
+            DarValorCadenaSiguiente(cadenasAnalizar);
 
 
             document.getElementById("EstadoActual").innerHTML = estadoInicial;
-            document.getElementById("cadenasUsar").innerHTML = cadenasAnalizar[1];
+            document.getElementById("EstadoInicial").innerHTML = estadoInicial;
             document.getElementById("NumeroCaracter").innerHTML = 0;
             document.getElementById("EstadoAceptacion").innerHTML = estadoAceptacion;
 
@@ -378,16 +369,9 @@
                 if (estadoActual == estadoAceptacion) {
                     document.getElementById("siguienteEstado").style.display = "none";
                     Swal.fire({
-                        title: 'La cadena es aceptada!',
-                        width: 600,
-                        padding: '3em',
-                        color: '#716add',
-                        background: '#fff url(/images/trees.png)',
-                        backdrop: `
-                        rgba(0,0,123,0.4)
-                        url("/images/nyan-cat.gif")
-                        left top
-                        no-repeat `
+                        icon: 'success',
+                        title: 'Enhorabuena!',
+                        text: 'La cadena ha sido aceptada!',
                     })
                     document.getElementById("botonSiguienteCadena").style.display = "block";
                 } else {
@@ -396,7 +380,6 @@
                         icon: 'error',
                         title: 'Oops...',
                         text: 'La cadena no es valida!',
-                        footer: '<a href="">Why do I have this issue?</a>'
                     })
                     document.getElementById("botonSiguienteCadena").style.display = "block";
                 }
@@ -418,13 +401,47 @@
             draw();
         }
 
+        function DarValorCadenaSiguiente() {
+            borrarDatos();
+            var cadenasAnalizar = document.getElementById("todasLasCadenas").textContent;
+            var rosa = document.getElementById('numeroCadenaUso').textContent;
+            var verde = parseInt(rosa) + 1;
+
+            cadenasAnalizar = cadenasAnalizar.split('$');
+            console.log(cadenasAnalizar)
+            if (cadenasAnalizar[verde] == "undefined") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'No hay mas cadenas para analizar!',
+                })
+            } else {
+                document.getElementById("cadenasUsar").innerHTML = cadenasAnalizar[verde];
+                document.getElementById("numeroCadenaUso").innerHTML = verde;
+
+                document.getElementById('siguienteEstado').style.display = "block";
+                document.getElementById('botonSiguienteCadena').style.display = "none";
+            }
+        }
+
 
         function ObtenerValorCadenas(cadenas) {
             var array = cadenas.split('$');
             array = array.filter(function(el) {
                 return el != "";
             });
+            console.log(array);
             return array;
+        }
+
+        function borrarDatos() {
+            var estadoInicial = document.getElementById("EstadoInicial").textContent;
+            document.getElementById("EstadoActual").innerHTML = estadoInicial;
+            document.getElementById("NumeroCaracter").innerHTML = 0;
+            document.getElementById("data").innerHTML = " ";
+
+
+
         }
     </script>
 @endpush

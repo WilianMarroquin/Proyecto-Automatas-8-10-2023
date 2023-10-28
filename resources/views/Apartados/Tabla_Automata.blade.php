@@ -30,7 +30,8 @@
 
 
     <div style=" margin: auto; margin-top: 30px;  width: 90%" class=" card">
-        <div class="card-header bg-success opacity-10">
+        <div class="card-header" style="background: rgb(2,0,36);
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 14%, rgba(100,220,245,1) 82%);">
                 Automatas:
             </div>
             <button id="boton_pasos" class="btn btn-success boton_verificar">Pasos Espesificados</button>

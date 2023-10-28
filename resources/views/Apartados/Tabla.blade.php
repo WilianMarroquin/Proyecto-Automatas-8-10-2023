@@ -56,18 +56,25 @@
         }
 
         .colorHeadCuadro {
-            background-color: #00e745;
+            background: rgb(3, 41, 255);
         }
     </style>
 @endpush
+
+<textarea style="display: none" name="valores" id="valores" cols="30" rows="10"></textarea>
+
 <div style="margin-bottom: 20px">
     <label for="formFileLg" class="form-label">Archivo de entrada: </label>
     <input class="form-control form-control-lg" id="file-input" type="file">
 </div>
+<div style="margin-left: 400px">
+    <span >Estado De Aceptacion : <h3 id="EstadoAceptacion"></h3></span>
+    <span >Cadena Actual : <h3 id="cadenasUsar"></h3></span>
+</div>
 
-<textarea style="display: none" name="valores" id="valores" cols="30" rows="10"></textarea>
 
-<div style="width:90%; margin:auto; margin-top: 40px; "class=" text-center">
+
+<div style="width:90%; margin:auto; margin-top:-100px  "class=" text-center">
     <div id="simbolos" class="row">
         {{-- <div class="col" style="margin-left: 10px; max-width:52px"></div> --}}
     </div>
@@ -87,17 +94,21 @@
 
 
 
-<span style="display: none">El estado Actual es: <h4 id="EstadoActual"></h4></span>
+<span style="display: none" >El estado Actual es: <h4 id="EstadoActual"></h4></span>
 <span style="display: none">El numero de caracter es: <h4 id="NumeroCaracter"></h4></span>
-<span style="display: none">Las cadenas a usar son: <h4 id="cadenasUsar"></h4></span>
 <span style="display: none">El caracter actual es: <h4 id="CaracterActual"></h4></span>
-<span style="display: none">El estado de aceptacion es : <h4 id="EstadoAceptacion"></h4></span>
 <span style="display: none">Estado anteerior (Para el color) : <h4 id="EstadoAnterior"></h4></span>
 <span style="display: none">Estado Anterior de transiciones: <h4 id="NumeroEstadoAnterior"></h4></span>
 <span style="display: none">Proximo estado al que pasa (Anterior): <h4 id="ProximoEstadoAnterior"></h4></span>
 <span style="display: none">Proximo simbolos al que pasa (Anterior): <h4 id="ProximoSimboloAnterior"></h4></span>
 <span style="display: none">El color del estado (Anterior): <h4 id="colorEstadoAnterior"></h4></span>
 <span style="display: none">¿La cadena es valida? <h4 id="EsValida"></h4></span>
+<span style="display: none">La cadena que se esta usando <h4 id="numeroCadenaUso"></h4></span>
+
+<span style="display: none">Aca estan todas las cadenas<h1 id="todasLasCadenas"></h1></span>
+<span style="display: none">Es el estado Inicial<h1 id="EstadoInicial"></h1></span>
+
+
 
 
 @push('scripts')

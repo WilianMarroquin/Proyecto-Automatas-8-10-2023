@@ -27,9 +27,11 @@
     <title>Automatas-@yield('titulo')</title>
     @stack('head')
 </head>
-<body>
+<body style="background: rgb(234, 231, 231)">
     <!-- Nav tabs -->
-    <ul style="background: rgb(70, 220, 0); color: black" class="nav nav-tabs " id="navId" style="margin-bottom: 30px; padding: 20px">
+    
+    <ul style="background: rgb(2,0,36);
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 14%, rgba(100,220,245,1) 82%); color: black" class="nav nav-tabs " id="navId" style="margin-bottom: 30px; padding: 20px">
         <li class="nav-item">
             <a href="{{route('importar')}}" class="nav-link @yield('importar-active')">Empezar!</a>
         </li>
@@ -46,7 +48,7 @@
             <a href="{{route('ejemplos')}}" class="nav-link @yield('ejemplos-active')">Ejemplos</a>
         </li>
         <li class="nav-item">
-            <a href="{{route('tabla')}}" class="nav-link  @yield('')">Tabla</a>
+            <a href="{{ route('documentacion') }}" class="nav-link  @yield('documentacion-active')">Documentos</a>
         </li>
         <li class="nav-item">
             <a href="{{route('Automata')}}" class="nav-link  @yield('automatas-active')">Automata</a>

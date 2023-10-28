@@ -88,30 +88,87 @@
 @endsection
 
 @section('contenido')
-<button onclick="darvalor()">dar valor</button>
-
 <div id="header">
   <div>
-    <button id="draw" title="Draw the DOT graph (Ctrl+Enter)">Draw</button>
-    <span id="error"></span>
+    <h1 style="text-align: center; margin-top:30px">Ejemplo de archivo de entrada</h1>
   </div>
 </div>
 
 <div id="contents">
   <div id="left">
-    <textarea id="data">
+    <textarea style="width: 300px; height:400px; margin-left:100px" id="data">
+Simbolos: 0,1
+Estados: Q0,Q1,Q2,Q3,Q4,Q5,Q6,Q7,Q8,Q9,Q10,Q11,Q12
+Estado inicial: Q0
+Estados de aceptación: Q5
+Transiciones:
+Q7,Q1
+Q8,Q2
+Q9,Q3
+Q4,Q6
+Q5,Q6
+Q7,Q1
+Q6,Q6
+Q11,Q8
+Q9,Q12
+Q10,Q4
+Q5,Q5
+Q12,Q12
+Q10,Q10
+Cadenas a analizar:
+0,1,1,1,0
+1,1,0,1,0
+1,1,1,1,0,0,0,1,0,1
+0,1,1,0,1,1,1,0,1,0
 
 </textarea>
-  </div>
-  <div id="right">
-    <div id="mynetwork"></div>
+ <textarea style="width: 300px; height:400px; margin-left:40px" id="data">
+Simbolos: 0,1
+Estados: Q0,Q1,Q2,Q3,Q4,Q5,Q6,Q7,Q8,Q9,Q10,Q11,Q12
+Estado inicial: Q0
+Estados de aceptación: Q5
+Transiciones:
+Q7,Q1
+Q8,Q2
+Q9,Q3
+Q4,Q6
+Q5,Q6
+Q7,Q1
+Q6,Q6
+Q11,Q8
+Q9,Q12
+Q10,Q4
+Q5,Q5
+Q12,Q12
+Q10,Q10
+Cadenas a analizar:
+1,0,0,1
+1,1,0,1,0
+1,1,1,1,0,0,0,1,0,1
+0,1,1,0,1,1,1,0,1,0
+0,1,1,1,0
+</textarea>
+ <textarea style="width: 300px; height:400px; margin-left:40px" id="data">
+Simbolos: 0,1
+Estados: 	Q0,Q1,Q2,Q3
+Estado inicial: Q0
+Estados de aceptación: Q0
+Transiciones:
+Q2,Q1
+Q3,Q0
+Q0,Q3
+Q1,Q2
+Cadenas a analizar:
+1,0,0,1
+0,0,1,0,1
+</textarea>
   </div>
 </div>
 
 
 @endsection
 
-@section('scripts')
+@push('scripts')
 
 <script type="text/javascript">
   // create a network
@@ -205,5 +262,5 @@
     "}";
   }; 
 </script>
-@endsection
+@endpush
 
