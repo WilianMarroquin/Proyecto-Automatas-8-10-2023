@@ -107,6 +107,9 @@
 
 <span style="display: none">Aca estan todas las cadenas<h1 id="todasLasCadenas"></h1></span>
 <span style="display: none">Es el estado Inicial<h1 id="EstadoInicial"></h1></span>
+<span style="display: none">¿Ya hubo una transicion en la tabla?<h1 id="historicoColorTabla"></h1></span>
+<span style="display: none">¿Ya hubo una transicion en la tabla?<h1 id="transicionesColor"></h1></span>
+
 
 
 
@@ -219,7 +222,7 @@
 
             //se crea los estados de la tabla
             for (i = 0; i < estados.length; i++) {
-                crearElementoEstados(estados[i]);
+                crearElementoEstados(estados[i], i);
             }
             //se crea los simbolos de la tabla
             for (i = 1; i < transicionCalculada.length; i++) {
@@ -256,7 +259,7 @@
             document.getElementById('transiciones').appendChild(div);
         }
 
-        function crearElementoEstados(Dato) {
+        function crearElementoEstados(Dato, i) {
             var div = document.createElement('div');
             div.classList.add('col');
             // div.classList.add('tamaño');
@@ -264,7 +267,8 @@
             div.classList.add('tamaño');
             // div.style.max_width = '70px';
             div.innerHTML = Dato;
-            document.getElementById('estados').appendChild(div);
+            div.setAttribute('id', 'estado-' + (i+1)); // Add an id to the div
+            document.getElementById('estados').appendChild(div);   
         }
     </script>
 @endpush

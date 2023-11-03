@@ -157,10 +157,15 @@
                 diseñarAutomata +
                 "}";
 
+
+
+
             document.getElementById("numeroCadenaUso").innerHTML = 0;
             document.getElementById("todasLasCadenas").innerHTML = cadenasAnalizar;
 
             DarValorCadenaSiguiente(cadenasAnalizar);
+
+            document.getElementById("transicionesColor").innerHTML = transiciones;
 
 
             document.getElementById("EstadoActual").innerHTML = estadoInicial;
@@ -330,6 +335,8 @@
                         datosCalculados[a] = estadoActual + "->" + ProximoEstado[0] + "[label=" + '"' +
                             simboloComparado[0] + '", color = aqua]' + estadoActual + "[color=aqua]" + "\n";
 
+                        colorTablaTransiciones(estadoActual);
+
                         if (document.getElementById('EstadoAnterior').textContent != "") {
                             var Numero = document.getElementById('NumeroEstadoAnterior').textContent;
                             var estadoAnterior = document.getElementById('EstadoAnterior').textContent;
@@ -439,9 +446,35 @@
             document.getElementById("EstadoActual").innerHTML = estadoInicial;
             document.getElementById("NumeroCaracter").innerHTML = 0;
             document.getElementById("data").innerHTML = " ";
+        }
 
+        function colorTablaTransiciones(estadoActual) {
 
+            var transi = document.getElementById('transicionesColor').textContent;
+            var transiB = transi.split(',');
 
+            for (i = 1; i <= transiB.length; i++) {
+
+                var filaCambiarColor = "";
+                var filaCambiarColor = document.getElementById('estado-' + i).textContent;
+
+                if (filaCambiarColor === estadoActual) {
+
+                    if (document.getElementById('historicoColorTabla').textContent != '') {
+                        var valor = parseInt(document.getElementById('historicoColorTabla').textContent);
+
+                        document.getElementById('estado-' + valor).style.backgroundColor = "white";
+                        document.getElementById('transicion: 0' + ' linea: ' + valor).style.background = "white";
+                        document.getElementById('transicion: 1' + ' linea: ' + valor).style.background = "white";
+                    }
+
+                    document.getElementById('estado-' + i).style.backgroundColor = "aqua";
+                    document.getElementById('transicion: 0' + ' linea: ' + i).style.background = "aqua";
+                    document.getElementById('transicion: 1' + ' linea: ' + i).style.background = "aqua";
+
+                    document.getElementById('historicoColorTabla').innerHTML = i;
+                }
+            }
         }
     </script>
 @endpush
