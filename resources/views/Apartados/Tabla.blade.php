@@ -58,8 +58,16 @@
         .colorHeadCuadro {
             background: rgb(3, 41, 255);
         }
+
+        .imagenes {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
     </style>
 @endpush
+
+
 
 <textarea style="display: none" name="valores" id="valores" cols="30" rows="10"></textarea>
 
@@ -68,33 +76,43 @@
     <input class="form-control form-control-lg" id="file-input" type="file">
 </div>
 <div style="margin-left: 400px">
-    <span >Estado De Aceptacion : <h3 id="EstadoAceptacion"></h3></span>
-    <span >Cadena Actual : <h3 id="cadenasUsar"></h3></span>
+    <span>Estado De Aceptacion : <h3 id="EstadoAceptacion"></h3></span>
+    <span>Cadena Actual : <h3 id="cadenasUsar"></h3></span>
 </div>
 
 
-
-<div style="width:90%; margin:auto; margin-top:-100px  "class=" text-center">
-    <div id="simbolos" class="row">
-        {{-- <div class="col" style="margin-left: 10px; max-width:52px"></div> --}}
-    </div>
-    <div class="" style="display: flex">
-        {{-- Los estados --}}
-        <div class="col" id="estados" style="min-width: 70 px">
+<div style="width:90%; margin:auto; display: flex;  margin-top:-100px;" class=" text-center">
+    <div style="width: 80%">
+        <div id="simbolos" class="row">
+            {{-- <div class="col" style="margin-left: 10px; max-width:52px"></div> --}}
         </div>
-        {{-- las transiciones --}}
-        <div class="container text-center">
-            <div id="transiciones" class="row">
+        <div class="" style="display: flex">
+            {{-- Los estados --}}
+            <div class="col" id="estados" style="min-width: 70 px">
+            </div>
+            {{-- las transiciones --}}
+            <div class="container text-center">
+                <div id="transiciones" class="row">
+                </div>
             </div>
         </div>
     </div>
-    
+    <div style="width: 60%;">
+        <div style="width: 100%; heigth:400px; margin-top: 100px" class="border">
+            <ul class="list-group" id="MostrarCadenas">
+                <button type="button" class="list-group-item list-group-item-action active">
+                    Cadenas:
+                </button>
+            </ul>
+        </div>
+    </div>
+
 </div>
 
 
 
 
-<span style="display: none" >El estado Actual es: <h4 id="EstadoActual"></h4></span>
+<span style="display: none">El estado Actual es: <h4 id="EstadoActual"></h4></span>
 <span style="display: none">El numero de caracter es: <h4 id="NumeroCaracter"></h4></span>
 <span style="display: none">El caracter actual es: <h4 id="CaracterActual"></h4></span>
 <span style="display: none">Estado anteerior (Para el color) : <h4 id="EstadoAnterior"></h4></span>
@@ -109,6 +127,8 @@
 <span style="display: none">Es el estado Inicial<h1 id="EstadoInicial"></h1></span>
 <span style="display: none">¿Ya hubo una transicion en la tabla?<h1 id="historicoColorTabla"></h1></span>
 <span style="display: none">¿Ya hubo una transicion en la tabla?<h1 id="transicionesColor"></h1></span>
+<span style="display: none">Numero De La Cadena Actual<h1 id="NumeroCadenaActual"></h1></span>
+
 
 
 
@@ -140,6 +160,7 @@
             hacerTabla(simbolos, transicionCalculada, estados);
             document.getElementById('valores').innerHTML = contenido;
             darvalor();
+            vizualizarCadenas();
         }
 
         document.getElementById('file-input')
@@ -267,8 +288,33 @@
             div.classList.add('tamaño');
             // div.style.max_width = '70px';
             div.innerHTML = Dato;
-            div.setAttribute('id', 'estado-' + (i+1)); // Add an id to the div
-            document.getElementById('estados').appendChild(div);   
+            div.setAttribute('id', 'estado-' + (i + 1)); // Add an id to the div
+            document.getElementById('estados').appendChild(div);
+        }
+
+        function vizualizarCadenas() {
+            var cadenas = document.getElementById('todasLasCadenas').textContent;
+
+            var cadena = cadenas.split('$');
+
+            for (var i = 1; i < cadena.length; i++) {
+                var div = document.createElement('li');
+                div.classList.add('list-group-item');
+                div.innerHTML = cadena[i];
+                 div.classList.add('d-flex');
+                 div.classList.add('align-items-center');
+                 div.classList.add('justify-content-between');
+                div.setAttribute('id', 'cadena' + i);
+
+                var img = document.createElement('img');
+                img.classList.add('imagenes');
+                img.classList.add('text-right');
+                img.setAttribute('src', 'imagenes/esperar.png');
+                img.setAttribute('alt', '');
+
+                div.appendChild(img);
+                document.getElementById('MostrarCadenas').appendChild(div);
+            }
         }
     </script>
 @endpush

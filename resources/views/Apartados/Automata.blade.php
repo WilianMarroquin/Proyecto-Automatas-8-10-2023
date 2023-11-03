@@ -158,7 +158,7 @@
                 "}";
 
 
-
+            document.getElementById('NumeroCadenaActual').innerHTML = 1;
 
             document.getElementById("numeroCadenaUso").innerHTML = 0;
             document.getElementById("todasLasCadenas").innerHTML = cadenasAnalizar;
@@ -381,6 +381,27 @@
                         text: 'La cadena ha sido aceptada!',
                     })
                     document.getElementById("botonSiguienteCadena").style.display = "block";
+
+               
+                    var cadenaActualizada = document.getElementById("cadenasUsar").textContent;
+
+                    var numeroCadena = document.getElementById("NumeroCadenaActual").textContent;
+                    
+                    var rosa = document.getElementById('cadena' + numeroCadena);
+                    rosa.innerHTML = '';
+                    rosa.innerHTML = cadenaActualizada;
+
+                    var img = document.createElement('img');
+                    img.classList.add('imagenes');
+                    img.setAttribute('src', 'imagenes/cheque.png');
+                    img.setAttribute('alt', '');
+                    document.getElementById('cadena' + numeroCadena).appendChild(img);
+
+
+                    var docu = document.getElementById('NumeroCadenaActual'); 
+                    docu.innerHTML = ""; 
+                    docu.innerHTML = parseInt(numeroCadena) + 1;
+
                 } else {
                     document.getElementById("siguienteEstado").style.display = "none";
                     Swal.fire({
@@ -389,6 +410,25 @@
                         text: 'La cadena no es valida!',
                     })
                     document.getElementById("botonSiguienteCadena").style.display = "block";
+
+                    var cadenaActualizada = document.getElementById("cadenasUsar").textContent;
+
+                    var numeroCadena = document.getElementById("NumeroCadenaActual").textContent;
+                    
+                    var rosa = document.getElementById('cadena' + numeroCadena);
+                    rosa.innerHTML = '';
+                    rosa.innerHTML = cadenaActualizada;
+
+                    var img = document.createElement('img');
+                    img.classList.add('imagenes');
+                    img.setAttribute('src', 'imagenes/cancelar.png');
+                    img.setAttribute('alt', '');
+                    document.getElementById('cadena' + numeroCadena).appendChild(img);
+
+
+                    var docu = document.getElementById('NumeroCadenaActual'); 
+                    docu.innerHTML = ""; 
+                    docu.innerHTML = parseInt(numeroCadena) + 1;
                 }
             }
             for (var i = 0; i < datosCalculados.length; i++) {

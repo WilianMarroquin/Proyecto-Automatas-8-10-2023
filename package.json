@@ -15,6 +15,7 @@
     },
     "dependencies": {
         "@viz-js/viz": "^3.2.1",
+        "bootstrap-icons": "^1.11.1",
         "sweetalert2": "^11.7.32",
         "vis-network": "^9.1.7"
     }
