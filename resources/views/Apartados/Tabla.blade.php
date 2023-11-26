@@ -76,8 +76,11 @@
     <input class="form-control form-control-lg" id="file-input" type="file">
 </div>
 <div style="margin-left: 400px">
+
     <span>Estado De Aceptacion : <h3 id="EstadoAceptacion"></h3></span>
+    
     <span>Cadena Actual : <h3 id="cadenasUsar"></h3></span>
+
 </div>
 
 

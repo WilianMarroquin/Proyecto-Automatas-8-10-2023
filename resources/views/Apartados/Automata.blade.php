@@ -293,7 +293,7 @@
         function datoRenderAutomata() {
             var estadoActual = document.getElementById("EstadoActual").textContent;
             var dato = document.getElementById("data").value;
-            var cadenas = ObtenerValorCadenas(document.getElementById("cadenasUsar").textContent);
+            var cadenas = ObtenerValorCadenas(document.getElementById("cadenasUsar").textContent);  
 
             var CaracterActual = document.getElementById("CaracterActual").textContent;
 
